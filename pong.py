@@ -18,6 +18,9 @@ from universe import *
 (LARGURA, ALTURA) = (600, 400)
 TELA = pg.display.set_mode((LARGURA, ALTURA))
 
+PAREDE_ESQUERDA = -5
+PAREDE_DIREITA = 585
+
 
 from namedlist import namedlist
 
@@ -54,6 +57,7 @@ def move_bola(bolinha):
     if (bolinha.y == ALTURA and bolinha.dy > 0) \
             or (bolinha.y == 0 and bolinha.dy < 0):  # se vaca bateu na parede
         bolinha.dy = - bolinha.dy
+        print("bati na parede")
 
     # usar depurador (debugger)
 
@@ -66,18 +70,23 @@ def move_bola(bolinha):
         bolinha.y = 0
 
     # calcula novo dy
-    if (bolinha.x == LARGURA and bolinha.dx > 0) \
-            or (bolinha.x == 0 and bolinha.dx < 0):  # se vaca bateu na parede
+    if (bolinha.x == 561 and bolinha.dx > 0) \
+            or (bolinha.x == 35 and bolinha.dx < 35):  # se vaca bateu na parede
         bolinha.dx = - bolinha.dx
+        print("bati na parede22")
+        bolinha.pontos1+=1
+
+
     # usar depurador (debugger)
 
     # calcula novo y
     bolinha.x = bolinha.x + bolinha.dx
 
-    if bolinha.x > LARGURA:
-        bolinha.x = LARGURA
-    elif bolinha.x < 0:
-        bolinha.x = 0
+
+    if bolinha.x > 561:
+        bolinha.x = 561
+    elif bolinha.x < 35:
+        bolinha.x = 35
 
     return bolinha
 
@@ -87,8 +96,6 @@ def colide(plataforma,plataforma2, bolinha):
         bolinha.dx = - bolinha.dx
     if (plataforma2.x == bolinha.raio and plataforma2.x <= bolinha.x + bolinha.x) or (plataforma2.x + bolinha.raio >= bolinha.x and plataforma2.x + 15 <= bolinha.x + bolinha.raio) :
         bolinha.dx = - bolinha.dx
-    if (bolinha.x == 500):
-        print("pontos")
 
 def inverte(bola):
     bola.dx = -bola.dx
